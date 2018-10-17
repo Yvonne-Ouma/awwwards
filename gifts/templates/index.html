@@ -75,7 +75,6 @@
             {% for project_item in project %}
             <div class="col-md-6 col-md-6">
                 <div class="thumbnail">
-
                     <p>Posted {{ project_item.posted_time|timesince }} ago.</p>
                     <h3>{{project_item.name}}</h3>
                     <a href="{% url 'each_project' project_item.id%}"><img id="yvee" src="{{project_item.photo.url}}"
