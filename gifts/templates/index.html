@@ -76,8 +76,6 @@
             {% for project_item in project %}
             <div class="col-md-6 col-md-6">
                 <div class="thumbnail">
-                    {{project_item.project.profile_picture.url}}
-                    <img src="" alt="" style="border-radius:50%; height:60px; width:60px; float:left;">
 
                     <p>Posted {{ project_item.posted_time|timesince }} ago.</p>
                     <h3>{{project_item.name}}</h3>
