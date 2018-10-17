@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% load static %}
+{% block content%}
+{{ block.supper }}
+
+
+<div class="container" style="float:left; padding-top:150px">
+    <div class="row">
+
+        <div class="col-md-6">
+            {% if profile.profile_picture %}
+            <img src="{{profile.profile_picture.url}}" alt="" style="border-radius:50%; width:300px; height:300px; padding:0px; margin:0px;">
+            {% endif %}
+            <p>{{profile.bio}}</p>
+            <p>{{user.username}}</p>
+            <p>{{profile.user_name}}</p>
+
+        </div>
+        <div class="col-md-6">
+            <p>Follow</p>
+
+            <a href="{% url 'edit_profile' %}"><button>Edit Profile</button></a>
+        </div>
+
+
+
+    </div>
+    <div class="row">
+
+    </div>
+</div>
+</div>
+
+{% endblock %}

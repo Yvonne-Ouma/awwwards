@@ -1,0 +1,25 @@
+h1{
+    
+    text-align: center;
+
+}
+#main{
+    padding-top: 70px;
+    background-image:url("/static/images/abcdImage.jpeg");
+    background-size:cover;
+    background-repeat:no-repeat;
+    padding-bottom:300px;
+}
+#yvee:hover{
+    opacity: 0.5;
+
+    -ms-transform: scale(1.1);
+    
+    -webkit-transform: scale(1.1);
+    
+    transform: scale(1.1);
+    
+}
+.checked{
+    color: aqua;
+}
