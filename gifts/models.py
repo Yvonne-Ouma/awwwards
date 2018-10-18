@@ -76,7 +76,7 @@ class Review(models.Model):
         (10, '10'),
     }
     project = models.ForeignKey(Project, null=True, blank=True, on_delete=models.CASCADE, related_name="reviews")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews', null=True)
     comment = models.TextField()
     design = models.IntegerField(choices=rating, default=0)
     usability = models.IntegerField(choices=rating, default=0)

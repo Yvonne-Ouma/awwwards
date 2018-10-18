@@ -52,19 +52,19 @@ class ProjectTestClass(TestCase):
 
 class ReviewTestClass(TestCase):
     def setUp(self):
-        self.review=Review(comment="wooowww....",design=4,usability= 6, content=7)
+        self.review=Review(comment="wooow",design="4",usability= "6", content="7")
 
 #     def tearDown(self) :
 #         Review.objects.all().delete()
 
-#     def test_instance(self):
-#         self.assertIsInstance(self.review,Review)
+    def test_instance(self):
+        self.assertIsInstance(self.review,Review)
 
-#     def test_save_review(self):
-#         self.assertFalse(self.review in Review.objects.all())
-#         self.review.save()
-#         self.assertTrue(self.review in Review.objects.all())
-#         self.review.delete()
+    def test_save_review(self):
+        self.assertFalse(self.review in Review.objects.all())
+        self.review.save()
+        self.assertTrue(self.review in Review.objects.all())
+        self.review.delete()
 
 #     def test_delete_review(self):
 #         self.assertTrue(self.review in Review.objects.all())
