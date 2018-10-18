@@ -1,8 +1,8 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from .forms import SignupForm,ProjectForm,ProfileForm,ReviewForm
+from .forms import SignupForm, ProjectForm, ProfileForm, ReviewForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -11,13 +11,10 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
-from .models import Profile,Project,Review
+from .models import Profile, Project, Review
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProjectSerializer
-
-
-
 
 
 # Create your views here.
@@ -26,7 +23,7 @@ def welcome(request):
 
     project = Project.objects.all()
     profile = Profile.objects.all()
-    return render(request, 'index.html',{"project":project, "profile":profile})
+    return render(request, 'index.html', {"project": project, "profile": profile})
 
 
 def signup(request):
@@ -41,18 +38,19 @@ def signup(request):
             message = render_to_string('acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':account_activation_token.make_token(user),
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
             })
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(
-                        mail_subject, message, to=[to_email]
+                mail_subject, message, to=[to_email]
             )
             email.send()
             return HttpResponse('Please confirm your email address to complete the registration')
     else:
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})
+
 
 def activate(request, uidb64, token):
     try:
@@ -75,7 +73,8 @@ def profile(request):
     current_user = request.user
     # profile = Profile.objects.get(user=current_user)
     user = User.objects.get(username=request.user)
-    return render(request, 'profile/profile.html', {'user': current_user, "profile":profile})
+    return render(request, 'profile/profile.html', {'user': current_user, "profile": profile})
+
 
 @login_required(login_url='/accounts/login/')
 def edit_profile(request):
@@ -105,7 +104,8 @@ def edit_profile(request):
     else:
         form = ProfileForm()
 
-    return render(request, 'profile/edit_profile.html', {'form': form, 'user': user})    
+    return render(request, 'profile/edit_profile.html', {'form': form, 'user': user})
+
 
 @login_required(login_url='/accounts/login/')
 def post_project(request):
@@ -122,6 +122,7 @@ def post_project(request):
         form = ProjectForm()
         return render(request, 'project.html', {"form": form})
 
+
 @login_required(login_url='/accounts/login/')
 def search_results(request):
     if 'search' in request.GET and request.GET["search"]:
@@ -133,40 +134,37 @@ def search_results(request):
     else:
         message = "No searched project"
     #     return render(request, 'search.html', {"message": message})
-    return render(request, 'search.html', {"message": message, "projects": projects})   
+    return render(request, 'search.html', {"message": message, "projects": projects})
+
 
 def review(request, project_id=None):
-    if request.method =='POST':
+    try:
+        project = get_object_or_404(Project, pk=project_id)
+    except:
+        project = None
+        return redirect('home')
+
+    if request.method == 'POST':
         form = ReviewForm(request.POST)
 
         if form.is_valid():
             review = form.save(commit=False)
-            review.user =request.user
+            review.user = request.user
+            review.project = project
             review.save()
             return redirect('welcome')
 
     else:
         form = ReviewForm()
-        project = get_object_or_404(Project, pk=project_id)
 
-        try:
-            review = Review.object.get(project_pk=project_id)
+    review = Review.objects.filter(project__pk=project_id)
+    print(review)
 
-        except:
-            review = None
+    return render(request, 'review/review.html', {"review": review, "project": project, "form": form})
 
-        return render(request, 'review/review.html',{"review":review, "project":project, "form":form}) 
-        
+
 class ProjectList(APIView):
     def get(self, request, format=None):
         all_project = Project.objects.all()
-        serializers =ProjectSerializer(all_project, many=True)
+        serializers = ProjectSerializer(all_project, many=True)
         return Response(serializers.data)
-
-
-
-
-
-
-
-    
