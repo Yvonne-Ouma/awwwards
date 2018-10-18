@@ -9,7 +9,7 @@ Yvonne Ouma
 ### What a user can do:
 * Register to my applicaion by signing up
 * Log in as a user
-* View you profile and update is if interested
+* View you profile and update if interested
 * view other people's project
 * Post your projects for your peers to rate
 * Comment on other peoples projects
