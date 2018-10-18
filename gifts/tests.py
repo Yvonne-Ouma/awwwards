@@ -31,8 +31,8 @@ class ProjectTestClass(TestCase):
     def setUp(self):
         self.projectTest=Project(name="blog",photo="gifts/media/images/blog.jpg",project_description="a better experience", project_url="https://moringaschool.instructure.com", technologies_used = "html")
 
-#     def tearDown(self) :
-#         User.objects.all().delete()
+    # def tearDown(self) :
+    #     User.objects.all().delete()
 
     def test_instance(self):
         self.assertIsInstance(self.projectTest,Project)
@@ -52,10 +52,10 @@ class ProjectTestClass(TestCase):
 
 class ReviewTestClass(TestCase):
     def setUp(self):
-        self.review=Review(comment="wooow",design="4",usability= "6", content="7")
+        self.review=Review(comment="wooow",design=4,usability= 6, content=7)
 
-#     def tearDown(self) :
-#         Review.objects.all().delete()
+    # def tearDown(self) :
+    #     Review.objects.all().delete()
 
     def test_instance(self):
         self.assertIsInstance(self.review,Review)
@@ -66,11 +66,11 @@ class ReviewTestClass(TestCase):
         self.assertTrue(self.review in Review.objects.all())
         self.review.delete()
 
-#     def test_delete_review(self):
-#         self.assertTrue(self.review in Review.objects.all())
-#         self.review.save()
-#         self.assertFalse(self.review in Review.objects.all())
-#         self.review.delete()
+    def test_delete_review(self):
+        self.assertFalse(self.review in Review.objects.all())
+        self.review.save()
+        self.assertTrue(self.review in Review.objects.all())
+        self.review.delete()
 
 
                      
