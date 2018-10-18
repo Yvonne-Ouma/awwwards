@@ -58,18 +58,18 @@ class ReviewTestClass(TestCase):
         Review.objects.all().delete()
 
     def test_instance(self):
-        self.assertIsInstance(self.review,User)
+        self.assertIsInstance(self.review,Review)
 
-    def test_save_project(self):
-        self.assertFalse(self.review in Project.objects.all())
+    def test_save_review(self):
+        self.assertFalse(self.review in Review.objects.all())
         self.review.save()
-        self.assertTrue(self.review in Project.objects.all())
+        self.assertTrue(self.review in Review.objects.all())
         self.review.delete()
 
-    def test_delete_project(self):
-        self.assertTrue(self.review in Project.objects.all())
+    def test_delete_Review(self):
+        self.assertTrue(self.review in Review.objects.all())
         self.review.save()
-        self.assertFalse(self.review in Project.objects.all())
+        self.assertFalse(self.review in Review.objects.all())
         self.review.delete()
 
 
