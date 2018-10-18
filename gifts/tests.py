@@ -35,7 +35,7 @@ class ProjectTestClass(TestCase):
         User.objects.all().delete()
 
     def test_instance(self):
-        self.assertIsInstance(self.projectTest,User)
+        self.assertIsInstance(self.projectTest,Project)
 
     def test_save_project(self):
         self.assertFalse(self.projectTest in Project.objects.all())
@@ -66,7 +66,7 @@ class ReviewTestClass(TestCase):
         self.assertTrue(self.review in Review.objects.all())
         self.review.delete()
 
-    def test_delete_Review(self):
+    def test_delete_review(self):
         self.assertTrue(self.review in Review.objects.all())
         self.review.save()
         self.assertFalse(self.review in Review.objects.all())
