@@ -155,15 +155,8 @@ def review(request, project_id=None):
         except:
             review = None
 
-        return render(request, 'review/review.html',{"review":review, "project":project, "form":form})                
-
-
-
-
-
-
-    
-
+        return render(request, 'review/review.html',{"review":review, "project":project, "form":form}) 
+        
 class ProjectList(APIView):
     def get(self, request, format=None):
         all_project = Project.objects.all()
