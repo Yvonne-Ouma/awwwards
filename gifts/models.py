@@ -63,10 +63,32 @@ class Project(models.Model):
         return cls.objects.filter(name__icontains=search_term)
 
 
-class Votes(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    project =  models.ForeignKey(Project,on_delete=models.CASCADE,related_name='likes')
-    design = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(10)])
-    usability = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(10)])
-    creativity = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(10)])
-    content = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(10)])
+class Review(models.Model):
+    range = {
+        (1,'1'),
+        (2,'2'),
+        (3,'3'),
+        (4,'4'),
+        (5,'5'),
+        (6,'6'),
+        (7,'7'),
+        (8,'8'),
+        (9,'9'),
+        (10,'10'),
+    }
+    project = models.ForeignKey(Project, null=True, blank=True, on_delete=models.CASCADE, related_name="reviews")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    comment = models.TextField()
+    design = models.IntegerField(choices=range, default=0)
+    usability = models.IntegerField(choices=range, default=0)
+    content = models.IntegerField(choices=range, default=0)
+
+
+    def save_reviews(self):
+        self.save()
+
+    def __str__(self):
+        return self.usability        
+         
+
+
