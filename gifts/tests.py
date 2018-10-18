@@ -18,8 +18,7 @@ class ProfileTestClass(TestCase):
         self.yvonne.save_profile()
         profiles = Profile.objects.all()
         self.assertTrue(len(profiles) > 0)
-    #testng for deleting method
-
+    
     def test_delete_method(self):
         self.yvonne.save_profile()
         self.yvonne.delete_profile()
@@ -53,25 +52,25 @@ class ProjectTestClass(TestCase):
 
 class ReviewTestClass(TestCase):
     def setUp(self):
-        self.Review=Review(user="user",name="blog",photo="gifts/media/images/blog.jpg",project_description="a better experience", project_url="https://moringaschool.instructure.com", technologies_used = "html")
+        self.review=Review(user="user",comment="wooowww....",design=4,usability= 6, content=7)
 
     def tearDown(self) :
-        User.objects.all().delete()
+        Review.objects.all().delete()
 
     def test_instance(self):
-        self.assertIsInstance(self.projectTest,User)
+        self.assertIsInstance(self.review,User)
 
     def test_save_project(self):
-        self.assertFalse(self.projectTest in Project.objects.all())
-        self.projectTest.save()
-        self.assertTrue(self.projectTest in Project.objects.all())
-        self.projectTest.delete()
+        self.assertFalse(self.review in Project.objects.all())
+        self.review.save()
+        self.assertTrue(self.review in Project.objects.all())
+        self.review.delete()
 
     def test_delete_project(self):
-        self.assertTrue(self.projectTest in Project.objects.all())
-        self.projectTest.save()
-        self.assertFalse(self.projectTest in Project.objects.all())
-        self.projectTest.delete()
+        self.assertTrue(self.review in Project.objects.all())
+        self.review.save()
+        self.assertFalse(self.review in Project.objects.all())
+        self.review.delete()
 
 
                      
