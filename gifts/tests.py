@@ -30,7 +30,7 @@ class ProfileTestClass(TestCase):
 
 class ProjectTestClass(TestCase):
     def setUp(self):
-        self.projectTest=User(user="user",name="blog",photo="gifts/media/images/blog.jpg",project_description="a better experience", project_url="https://moringaschool.instructure.com", technologies_used = "html")
+        self.projectTest=Project(user="user",name="blog",photo="gifts/media/images/blog.jpg",project_description="a better experience", project_url="https://moringaschool.instructure.com", technologies_used = "html")
 
     def tearDown(self) :
         User.objects.all().delete()
@@ -51,9 +51,9 @@ class ProjectTestClass(TestCase):
         self.projectTest.delete()
 
 
-class ProjectTestClass(TestCase):
+class ReviewTestClass(TestCase):
     def setUp(self):
-        self.projectTest=User(user="user",name="blog",photo="gifts/media/images/blog.jpg",project_description="a better experience", project_url="https://moringaschool.instructure.com", technologies_used = "html")
+        self.Review=Review(user="user",name="blog",photo="gifts/media/images/blog.jpg",project_description="a better experience", project_url="https://moringaschool.instructure.com", technologies_used = "html")
 
     def tearDown(self) :
         User.objects.all().delete()
