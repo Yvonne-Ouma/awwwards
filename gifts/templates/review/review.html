@@ -25,8 +25,9 @@
                         <img src="{{ project.photo.url  }}" style="width:100%;">
                         <p> there's a problem displaying the image </p>
                         <div class="div-footer">
-                            </p> userbility rating {% if review.usability %} {{review.usability}} {% else %} no_review
-                            {%endif %}</p>
+                            <p>Usability:{{review.usability}}</p>
+                            <p>Design:{{review.design}}</p>
+                            <p>Content:{{review.content}}</p>
                             <p></p>
                         </div>
 
