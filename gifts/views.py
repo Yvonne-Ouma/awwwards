@@ -151,6 +151,7 @@ def review(request, project_id=None):
 
         try:
             review = Review.object.get(project_pk=project_id)
+
         except:
             review = None
 
