@@ -73,7 +73,7 @@ def activate(request, uidb64, token):
 @login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
-    profile = Profile.objects.get(user=current_user)
+    # profile = Profile.objects.get(user=current_user)
     user = User.objects.get(username=request.user)
     return render(request, 'profile/profile.html', {'user': current_user, "profile":profile})
 
