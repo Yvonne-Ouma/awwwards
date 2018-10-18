@@ -63,7 +63,7 @@ class Project(models.Model):
 
 
 class Review(models.Model):
-    range = {
+    rating = {
         (1, '1'),
         (2, '2'),
         (3, '3'),
@@ -78,9 +78,9 @@ class Review(models.Model):
     project = models.ForeignKey(Project, null=True, blank=True, on_delete=models.CASCADE, related_name="reviews")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     comment = models.TextField()
-    design = models.IntegerField(choices=range, default=0)
-    usability = models.IntegerField(choices=range, default=0)
-    content = models.IntegerField(choices=range, default=0)
+    design = models.IntegerField(choices=rating, default=0)
+    usability = models.IntegerField(choices=rating, default=0)
+    content = models.IntegerField(choices=rating, default=0)
 
 
     def save_reviews(self):
