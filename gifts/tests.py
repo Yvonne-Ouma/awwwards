@@ -30,9 +30,35 @@ class ProfileTestClass(TestCase):
 
 class ProjectTestClass(TestCase):
     def setUp(self):
+        self.projectTest=User(user="user",name="blog",photo="gifts/media/images/blog.jpg",project_description="a better experience", project_url="https://moringaschool.instructure.com", technologies_used = "html")
+
+    def tearDown(self) :
+        User.objects.all().delete()
+
+    def test_instance(self):
+        self.assertIsInstance(self.projectTest,User)
+
+    def test_save_project(self):
+        self.assertFalse(self.projectTest in Project.objects.all())
+        self.projectTest.save()
+        self.assertTrue(self.projectTest in Project.objects.all())
+        self.projectTest.delete()
+
+    def test_delete_project(self):
+        self.assertTrue(self.projectTest in Project.objects.all())
+        self.projectTest.save()
+        self.assertFalse(self.projectTest in Project.objects.all())
+        self.projectTest.delete()
+
+
+class TestUser(TestCase):
+    def setUp(self):
         self.testuser=User(username="user",email="test@mail.com")
 
     def tearDown(self) :
         User.objects.all().delete()
 
-                       
+    def test_instance(self):
+        self.assertIsInstance(self.testuser,User)
+
+                     
