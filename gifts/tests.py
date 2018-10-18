@@ -51,14 +51,4 @@ class ProjectTestClass(TestCase):
         self.projectTest.delete()
 
 
-class TestUser(TestCase):
-    def setUp(self):
-        self.testuser=User(username="user",email="test@mail.com")
-
-    def tearDown(self) :
-        User.objects.all().delete()
-
-    def test_instance(self):
-        self.assertIsInstance(self.testuser,User)
-
                      
