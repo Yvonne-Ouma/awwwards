@@ -80,7 +80,7 @@
                 <div class="thumbnail">
                     <p>Posted {{ project_item.posted_time|timesince }} ago.</p>
                     <h3>{{project_item.name}}</h3>
-                    <a href="{% url 'each_project' project_item.id%}"><img id="yvee" src="{{project_item.photo.url}}"
+                    <a href="{% url 'review' project_id=project_item.id %}"><img id="yvee" src="{{project_item.photo.url}}"
                             alt="Image" height=400px width="400px" style=" box-shadow: 1px 1px 1px 1px grey; transition: all 0.3s ease 0s; cursor:
     pointer; opacity: 0.8; width:400px ; height: 400px;"></a>
                     <div class="caption">
