@@ -135,9 +135,33 @@ def search_results(request):
     #     return render(request, 'search.html', {"message": message})
     return render(request, 'search.html', {"message": message, "projects": projects})   
 
-def each_project(request,id):
-    project = get_object_or_404(Project, pk=id)
-    return (request, 'each_project.html')
+def review(request, project_id=None):
+    if request.method =='POST':
+        form = ReviewForm(request.POST)
+
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user =request.user
+            review.save()
+            return redirect('welcome')
+
+    else:
+        form = ReviewForm()
+        project = get_object_or_404(Project, pk=project_id)
+
+        try:
+            review = Review.object.get(project_pk=project_id)
+        except:
+            review = None
+
+        return render(request, 'review/review.html',{"review":review, "project":project, "form":form})                
+
+
+
+
+
+
+    
 
 class ProjectList(APIView):
     def get(self, request, format=None):
